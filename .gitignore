@@ -8,6 +8,8 @@ data/
 .ipynb_checkpoints
 *.ipynb
 !example.ipynb
+!main.ipynb
+
 
 # Environments
 .env

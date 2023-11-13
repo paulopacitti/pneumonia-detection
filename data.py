@@ -3,20 +3,28 @@
 import torch
 import torchvision
 import torchvision.transforms.v2 as transforms
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 
-transform_train = transforms.Compose([
-    transforms.Resize((224, 224)),  
+mean = [0.485, 0.456, 0.406]
+std = [0.229, 0.224, 0.225]
+
+transform_to_tensor = transforms.Compose([
+    transforms.ToImage(), 
+    transforms.ToDtype(torch.float32, scale=True),
+    transforms.Resize((224, 224), antialias=True),  
     transforms.CenterCrop(224),
-    transforms.ToDtype(torch.uint8, scale=True),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), # RGB mean and std parameters
 ])
 
-train_set = torchvision.datasets.ImageFolder(root="data/train", transform=transform_train)
-validation_set = torchvision.datasets.ImageFolder(root="data/val", transform=transform_train)
-test_set = torchvision.datasets.ImageFolder(root="data/test", transform=transform_train)
+transform_normalize = transforms.Compose([
+    transforms.Normalize(mean=mean, std=std),
+])
 
-batch_size = 32
-train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
-validation_loader = DataLoader(validation_set, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True)
+transform_to_image = transforms.Compose([
+    transforms.ToPILImage(),
+])
+
+def split_dataset(dataset, split_ratio=0.8):
+    train_size = int(split_ratio * len(dataset))
+    val_size = len(dataset) - train_size
+    train_dataset, val_dataset = torch.utils.data.random_split(dataset, [train_size, val_size])
+    return train_dataset, val_dataset
