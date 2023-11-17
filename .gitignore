@@ -7,7 +7,6 @@ data/
 # Jupyter Notebook
 .ipynb_checkpoints
 *.ipynb
-!example.ipynb
 !main.ipynb
 
 

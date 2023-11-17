@@ -9,5 +9,8 @@ The dataset can be found in [Kaggle](https://www.kaggle.com/datasets/paultimothy
 python setup.py
 ```
 
+## Models
+Models are stored in the `bin/` directory. Usually, the most recent model is the one which is better trained and have better results.
+
 ## Contributing
-All development should be done in the Python modules. The `example.ipynb` is just an example for guiding out local development. Notebooks are not commited, as defined in `.gitgnore`.
+All development should be done in the Python modules. The `main.ipynb` is just an example for guiding out local development. Notebooks are not commited, as defined in `.gitgnore`.

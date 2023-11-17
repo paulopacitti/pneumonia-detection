@@ -90,7 +90,7 @@ class Trainer:
         cm.ax_.set_title("Validation confusion matrix")
 
     def get_history(self):
-        return { "train_loss": self.train_loss, "validation_loss": self.val_loss }
+        return { "train_loss": self.train_loss, "validation_loss": self.val_loss, "epochs": self.epochs }
 
     def plot_loss(self):
         _, ax = plt.subplots()

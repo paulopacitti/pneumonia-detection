@@ -14,6 +14,7 @@ class PneumoniaDetectionResNetModel(nn.Module):
         self.history = {}
 
     def forward(self, x):
+        x = self.transforms(x)
         return self.network(x)
     
     def set_history(self, history):
