@@ -36,7 +36,7 @@ def split_dataset(dataset, split_ratio=0.8):
 def plot_raw_transfomed_examples(dataloader, classes, transform):
     dataiter = iter(dataloader)
     images, labels = next(dataiter)
-    transformed_images = transform(images)
+    transformed_images = transform(images[1:5])
 
     figure = plt.figure(figsize=(12, 7))
     cols, rows = 4,2
@@ -48,7 +48,7 @@ def plot_raw_transfomed_examples(dataloader, classes, transform):
             plt.imshow(transform_to_image(images[i]))
         else:
             figure.add_subplot(rows, cols, i)
-            plt.title(classes[labels[i]])
+            plt.title(classes[labels[i-5]])
             plt.xlabel("transformed")
-            plt.imshow(transform_to_image(transformed_images[i]))
+            plt.imshow(transform_to_image(transformed_images[i-5]))
     plt.show()
