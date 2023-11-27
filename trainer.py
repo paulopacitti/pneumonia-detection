@@ -91,6 +91,11 @@ class Trainer:
 
     def get_history(self):
         return { "train_loss": self.train_loss, "validation_loss": self.val_loss, "epochs": self.epochs }
+    
+    def set_history(self, history):
+        self.train_loss = history["train_loss"]
+        self.val_loss = history["validation_loss"]
+        self.epochs = history["epochs"]
 
     def plot_loss(self):
         _, ax = plt.subplots()
