@@ -28,7 +28,7 @@ class Trainer:
                 self.optimizer.zero_grad()
 
                 # Make predictions for this batch
-                Y_pred = self.model.forward(images)
+                Y_pred = self.model(images)
 
                 # Compute the loss and its gradients
                 loss_value = self.loss_fn(Y_pred, labels)
@@ -46,7 +46,7 @@ class Trainer:
                 val_loss = 0
                 for i, (images, labels) in enumerate(self.val_dataloader):
                     images, labels = images.to(self.device), labels.to(self.device)
-                    Y_pred = self.model.forward(images)
+                    Y_pred = self.model(images)
                     loss_value = self.loss_fn(Y_pred, labels)
                     val_loss += loss_value.item()
                 print('Epoch [{}/{}], Validation Loss: {:.4f}'.format(epoch+1, self.epochs, val_loss / len(self.val_dataloader)))
@@ -62,7 +62,7 @@ class Trainer:
         with torch.no_grad():
             for images, labels  in self.train_dataloader:
                 images, labels = images.to(self.device), labels.to(self.device)
-                outputs = self.model.forward(images)
+                outputs = self.model(images)
                 accuracy.update(outputs, labels)
                 f1_score.update(outputs, labels)
                 confusion_matrix.update(outputs, labels)
@@ -79,7 +79,7 @@ class Trainer:
         with torch.no_grad():
             for images, labels in self.val_dataloader:
                 images, labels = images.to(self.device), labels.to(self.device)
-                outputs = self.model.forward(images)
+                outputs = self.model(images)
                 accuracy.update(outputs, labels)
                 f1_score.update(outputs, labels)
                 confusion_matrix.update(outputs, labels)
