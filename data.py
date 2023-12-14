@@ -12,6 +12,10 @@ transform_to_tensor = transforms.Compose([
     transforms.ToDtype(torch.float32, scale=True),
 ])
 
+transform_3_channels = transforms.Compose([
+    transforms.Grayscale(num_output_channels=3),
+])
+
 transform_crop_and_resize = transforms.Compose([
     transforms.Resize((256, 256), antialias=True),
     transforms.CenterCrop(256),
